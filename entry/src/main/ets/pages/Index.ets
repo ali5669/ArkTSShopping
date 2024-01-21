@@ -23,12 +23,13 @@ struct Index {
     .backgroundColor('#EFEFEF')
     .padding(30)
   }
-  @State param:any=router.getParams()
+  // @State param:any=router.getParams()
+  username:string='test'
   build() {
     Column(){
       Row(){
         Column(){
-          Text('用户名: '+this.param.username)
+          Text('用户名: '+this.username)
             .fontSize(15)
         }
       }
@@ -40,6 +41,18 @@ struct Index {
             .fontSize(30)
             .fontColor('#E92F4F')
         }
+      }
+      Row(){
+        Swiper(){
+          ForEach(this.ItemList,(item:Item)=>{
+            Image(item.image)
+          })
+        }
+        .index(0)
+        .indicator(true)
+        .autoPlay(true)
+        .height(100)
+
       }
       List({space:'12vp'}){
         ForEach(this.ItemList,(item:Item)=>{
