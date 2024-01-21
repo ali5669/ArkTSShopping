@@ -3,8 +3,6 @@ import router from '@ohos.router'
 @Entry
 @Component
 struct Login {
-
-
   @Styles buttonStyle(){
     .backgroundColor('#39C5BB')
     .width(75)
@@ -13,6 +11,7 @@ struct Login {
 
   @State tempUsername:string=''
   @State tempPassword:string=''
+  userName:string=''
   alert(alerts:string) {
     AlertDialog.show({
       message: alerts,
@@ -28,7 +27,6 @@ struct Login {
   }
   build() {
     Column() {
-
       Text('欢迎使用')
         .fontSize(40)
         .fontWeight(FontWeight.Bold)
@@ -66,7 +64,6 @@ struct Login {
       }
       .margin({bottom:75})
       Row(){
-
         Button('注册')
           .onClick(()=>{
 
@@ -85,9 +82,6 @@ struct Login {
           .margin({right:25})
         Button('登录')
           .onClick(()=>{
-            // console.log(this.tempUsername)
-            // console.log(this.tempPassword)
-
             if(this.tempUsername===''||this.tempPassword===''){
               this.alert('未输入账号或密码，请重新输入！')
             }
@@ -98,22 +92,19 @@ struct Login {
               this.alert('账号或密码错误，请重新输入！')
             }
             else{
+              this.userName=this.tempUsername
               router.replaceUrl({
-                url:'Index',
+                url:'pages/Index',
                 params:{username:this.tempUsername}
               })
             }
           })
           .buttonStyle()
-
       }
       .justifyContent(FlexAlign.SpaceEvenly)
-
     }
     .width('100%')
     .height('100%')
-    // .justifyContent(FlexAlign.SpaceEvenly)
-    // .alignItems(HorizontalAlign.Center)
     .margin({top:50})
   }
 }
