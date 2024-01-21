@@ -20,19 +20,16 @@ struct Index {
   ]
   @Styles fillScreen(){
     .width('100%')
-    .height('100%')
     .backgroundColor('#EFEFEF')
-    .padding(20)
+    .padding(30)
   }
-  // @State param:any=router.getParams()
-  @State username:string='用户名：UserName'
+  @State param:any=router.getParams()
   build() {
     Column(){
       Row(){
         Column(){
-          Text(this.username)
+          Text('用户名: '+this.param.username)
             .fontSize(15)
-          // .fontWeight(FontWeight.Lighter)
         }
       }
       .height(25)
@@ -41,6 +38,7 @@ struct Index {
           Text('商品热卖中！')
             .fontWeight(FontWeight.Bold)
             .fontSize(30)
+            .fontColor('#E92F4F')
         }
       }
       List({space:'12vp'}){
@@ -49,24 +47,32 @@ struct Index {
         })
       }
       .lanes(2)
-      .width('100%')
+      .width('95%')
       .height('100%')
     }
-
   }
   @Builder Items(item:Item){
     Column(){
       Image(item.image)
         .width(100)
         .height(100)
-        // .objectFit(ImageFit.Contain)
-        .margin({top:16,bottom:8})
+        .objectFit(ImageFit.Contain)
       Column(){
         Text(item.name)
           .maxLines(2)
-          .fontSize(12)
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+        Text('￥'+item.price)
+          .fontColor('#E92F4F')
+          .fontSize(16)
       }
     }
-
+    .height(200)
+    .padding(30)
+    .backgroundColor('#EFEFEF')
+    .margin(8)
+    .onClick(()=>{
+      // router.pushUrl()
+    })
   }
 }
