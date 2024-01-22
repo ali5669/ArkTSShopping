@@ -18,5 +18,6 @@ export class Item{
   image: ResourceStr = ''
   price: number = 0
   specifications? :Specification[] = []
+  reviews?:String[]=[]
 }
 
