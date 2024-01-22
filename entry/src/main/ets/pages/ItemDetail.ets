@@ -13,57 +13,78 @@ struct ItemDetail {
     Column() {
       MainHeader()
 
-      Column(){
-        //图片
-        Row(){
-          Image(this.item.image)
-            .width('100%')
-        }
-        .margin({bottom:30})
-        .constraintSize({maxHeight:'60%'})
-        //价格
-        Row(){
-          Text('￥'+this.item.price)
-            .fontColor('#F36')
-            .fontSize(20)
-        }
-        .width('90%')
-        .margin({bottom:20})
-        // .justifyContent(FlexAlign.Start)
-
-        //商品名字
-        Row(){
-          Text(this.item.title)
-            .fontSize(24)
-        }
-        .width('90%')
-        .margin({bottom:30})
-
-
-        //评论
-        Row(){
-          Text('买家评论')
-            .fontSize(20)
-        }
-        .width('90%')
-
-        ForEach(
-          this.item.reviews,
-          re=>{
+      List(){
+        ListItem(){
+          Column(){
+            //图片
             Row(){
-              Text(re)
+              Image(this.item.image)
+                .width('100%')
             }
-            .width('80%')
+            .margin({bottom:30})
+            .constraintSize({maxHeight:'60%'})
+            //价格
+            Row(){
+              Text('￥'+this.item.price)
+                .fontColor('#F36')
+                .fontSize(20)
+            }
+            .width('90%')
+            .margin({bottom:20})
+            // .justifyContent(FlexAlign.Start)
+
+            //商品名字
+            Row(){
+              Text(this.item.title)
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+            }
+            .width('90%')
+            .margin({bottom:30})
+
+
+            //评论标题
+            Row(){
+              Text('买家评论')
+                .fontSize(20)
+                .fontWeight(FontWeight.Bold)
+            }
+            .width('90%')
+            .margin({bottom:10})
+
+            //具体评论
+            if(this.item.reviews){
+              ForEach(
+                this.item.reviews,
+                review=>{
+                  Row(){
+                    Text(review)
+                      .fontSize(18)
+                  }
+                  .width('80%')
+                  .margin({bottom:5})
+                }
+              )
+            }
+            else {
+              Text('无')
+            }
+
+
           }
-        )
+        }
       }
+      .height('88%')
+
+
 
       //加入购物车
-      Row({space:5}){
+      Row(){
         Button('加入购物车')
           .width('40%')
+          .height('60%')
           .fontSize(22)
-          .backgroundColor('#FCBC02')
+          .backgroundColor('#FFCB01')
           .onClick(()=>{
             router.pushUrl({
               url: 'pages/CashPage',
@@ -77,13 +98,14 @@ struct ItemDetail {
                   console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
                 }
               })
-
           })
+
         Button('立即购买')
-        .width('40%')
-        .fontSize(22)
-        .backgroundColor('#FF2435')
-        .onClick(()=>{
+          .width('40%')
+          .height('60%')
+          .fontSize(22)
+          .backgroundColor('#F8332D')
+          .onClick(()=>{
           router.pushUrl({
             url: 'pages/CashPage',
             params:{
@@ -100,11 +122,11 @@ struct ItemDetail {
 
       }
       .width('100%')
-      .height('4%')
-      .alignItems(VerticalAlign.Bottom)
+      .height('6%')
+      .backgroundColor('#FFFFFF')
+      .alignItems(VerticalAlign.Center)
       .justifyContent(FlexAlign.Center)
-      .position({y:'95%' })
-      // .backgroundColor('#FCBC02')
+      .position({y:'94%' })
 
     }
     .height('100%')
