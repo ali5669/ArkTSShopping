@@ -53,7 +53,7 @@ struct ItemDetail {
             .margin({bottom:10})
 
             //具体评论
-            if(this.item.reviews){
+            if(this.item.reviews&&this.item.reviews.length){
               ForEach(
                 this.item.reviews,
                 review=>{
@@ -62,7 +62,7 @@ struct ItemDetail {
                       .fontSize(18)
                   }
                   .width('80%')
-                  .margin({bottom:5})
+                  .margin({bottom:10})
                 }
               )
             }
