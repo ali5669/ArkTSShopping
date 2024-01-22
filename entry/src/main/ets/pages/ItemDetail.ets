@@ -42,7 +42,8 @@ struct ItemDetail {
             router.pushUrl({
               url: 'pages/CashPage',
               params:{
-                id: this.item.id
+                id: this.item.id,
+                type: 0
               }
             },
               (err) => {
@@ -50,13 +51,25 @@ struct ItemDetail {
                   console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
                 }
               })
+
           })
         Button('立即购买')
         .width('40%')
         .fontSize(22)
         .backgroundColor('#FF2435')
         .onClick(()=>{
-          router.back()
+          router.pushUrl({
+            url: 'pages/CashPage',
+            params:{
+              id: this.item.id,
+              type: 1
+            }
+          },
+            (err) => {
+              if (err) {
+                console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+              }
+            })
         })
 
       }

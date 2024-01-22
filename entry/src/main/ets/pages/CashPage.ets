@@ -3,6 +3,7 @@ import { ItemData } from '../viewmodel/ItemData'
 import { QuantityAdjustBar } from '../components/CashPage/QuantityAdjustBar'
 import { TypeChooseList } from '../components/CashPage/TypeChooseList'
 import { PayButton } from '../components/CashPage/PayButton'
+import { AddButton } from '../components/CashPage/AddButton'
 import { Header } from '../components/CashPage/Header'
 import router from '@ohos.router'
 
@@ -16,7 +17,7 @@ import router from '@ohos.router'
 
 @Entry
 @Component
-struct CashPage {
+export struct CashPage {
   @State params: any = router.getParams()
   @State item: Item = ItemData.find(item => item.id == this.params.id)
   @State quantity: number = 1
@@ -53,9 +54,12 @@ struct CashPage {
 
 
       Blank()
-
-
-      PayButton({ quantity: this.quantity })
+      if(this.params.type == 0){
+        AddButton()
+      }
+      else{
+        PayButton({ quantity: this.quantity })
+      }
 
     }
     .height('100%')
