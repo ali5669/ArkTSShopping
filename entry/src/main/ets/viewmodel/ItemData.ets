@@ -20,6 +20,10 @@ export const ItemData: Item[] = [
           {title: '品质3', price: 20, image: $r('app.media.paper')}
         ]
       }
+    ],
+    reviews:[
+      '好好好',
+      '不好'
     ]
   },
   {

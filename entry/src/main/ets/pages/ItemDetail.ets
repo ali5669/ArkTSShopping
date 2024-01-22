@@ -12,24 +12,50 @@ struct ItemDetail {
   build() {
     Column() {
       MainHeader()
+
       Column(){
+        //图片
         Row(){
           Image(this.item.image)
             .width('100%')
-        }.margin({bottom:30})
+        }
+        .margin({bottom:30})
+        .constraintSize({maxHeight:'60%'})
+        //价格
         Row(){
           Text('￥'+this.item.price)
             .fontColor('#F36')
             .fontSize(20)
         }
-        // .justifyContent(FlexAlign.Start)
         .width('90%')
         .margin({bottom:20})
+        // .justifyContent(FlexAlign.Start)
+
+        //商品名字
         Row(){
           Text(this.item.title)
             .fontSize(24)
         }
         .width('90%')
+        .margin({bottom:30})
+
+
+        //评论
+        Row(){
+          Text('买家评论')
+            .fontSize(20)
+        }
+        .width('90%')
+
+        ForEach(
+          this.item.reviews,
+          re=>{
+            Row(){
+              Text(re)
+            }
+            .width('80%')
+          }
+        )
       }
 
       //加入购物车
