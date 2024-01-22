@@ -35,12 +35,20 @@ struct ItemDetail {
       //加入购物车
       Row({space:5}){
         Button('加入购物车')
-          .width('60%')
+          .width('40%')
           .fontSize(22)
           .backgroundColor('#FCBC02')
           .onClick(()=>{
             router.back()
           })
+        Button('立即购买')
+        .width('40%')
+        .fontSize(22)
+        .backgroundColor('#FF2435')
+        .onClick(()=>{
+          router.back()
+        })
+
       }
       .width('100%')
       .height('4%')
