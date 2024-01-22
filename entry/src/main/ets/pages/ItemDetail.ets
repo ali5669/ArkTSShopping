@@ -2,8 +2,6 @@ import router from '@ohos.router'
 import {MainHeader} from '../components/MainHeader/MainHeader'
 import { Item, ShowItem } from '../datatype/Item'
 
-
-@Entry
 @Component
 struct ItemDetail {
   // private item:Item
