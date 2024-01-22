@@ -12,7 +12,7 @@ import {ItemData} from '../viewmodel/ItemData'
 @Entry
 @Component
 
-export struct OrderPage {
+export struct CartPage {
   @State message: string = 'Hello World'
   // 商品数据
 
