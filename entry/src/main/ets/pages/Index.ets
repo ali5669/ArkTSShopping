@@ -3,7 +3,7 @@ import { Item} from '../datatype/Item'
 
 @Entry
 @Component
-struct Index {
+export struct Index {
   private ItemList:Item[]=[
     new Item('抽纸',$r('app.media.paper'),15.5),
     new Item('华为Mate60', $r('app.media.mate60'),6999),
@@ -54,7 +54,7 @@ struct Index {
         .height(100)
 
       }
-      List({space:'12vp'}){
+      List(){
         ForEach(this.ItemList,(item:Item)=>{
           this.Items(item)
         })
@@ -83,6 +83,7 @@ struct Index {
     .height(200)
     .padding(30)
     .backgroundColor('#EFEFEF')
+    .borderRadius(25)
     .margin(8)
     .onClick(()=>{
       // router.pushUrl()
