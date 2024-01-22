@@ -1,24 +1,24 @@
 import router from '@ohos.router'
 import {MainHeader} from '../components/MainHeader/MainHeader'
-import { Item, ShowItem } from '../datatype/Item'
+import { Item } from '../viewmodel/ItemModel'
+import { ItemData } from '../viewmodel/ItemData'
 
+@Entry
 @Component
 struct ItemDetail {
   // private item:Item
-  @State  params:any=router.getParams()
-
-
+  @State params: any = router.getParams()
+  @State item: Item = ItemData.find(item => item.id == this.params.id)
   build() {
     Column() {
       MainHeader()
-
       Column(){
         Row(){
-          Image(this.params.image)
+          Image(this.item.image)
             .width('100%')
         }.margin({bottom:30})
         Row(){
-          Text('￥'+this.params.price)
+          Text('￥'+this.item.price)
             .fontColor('#F36')
             .fontSize(20)
         }
@@ -26,7 +26,7 @@ struct ItemDetail {
         .width('90%')
         .margin({bottom:20})
         Row(){
-          Text(this.params.name)
+          Text(this.item.title)
             .fontSize(24)
         }
         .width('90%')
