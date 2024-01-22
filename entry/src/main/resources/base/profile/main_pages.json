@@ -1,7 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/Login"
+    "pages/Login",
     "pages/ItemShowcase",
     "pages/ItemDetail"
   ]
