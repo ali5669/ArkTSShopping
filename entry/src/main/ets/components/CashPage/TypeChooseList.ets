@@ -26,19 +26,16 @@ struct ItemCard{
   @Consume chooseItem: Item
 
   build(){
-    Button(){
-      Row(){
-        Image(this.item.image)
-          .width(50)
-          .margin({right: 5})
-        Text(this.item.name)
-          .fontSize(24)
-      }
+    Row(){
+      Image(this.item.image)
+        .width(50)
+        .margin({right: 5})
+      Text(this.item.name)
+        .fontSize(24)
     }
     .backgroundColor(this.item == this.chooseItem? '#FFFFFF': '#e0e0e0')
     .borderWidth(this.item == this.chooseItem? 1: 0)
     .borderColor(Color.Red)
-    .type(ButtonType.Normal)
     .onClick(()=>{
       this.chooseItem = this.item
     })
