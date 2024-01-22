@@ -1,18 +1,20 @@
 import {Header} from '../common/components/CommonComponents'
+import {Item} from '../viewmodel/ItemModel'
+import {ItemData} from '../viewmodel/ItemData'
 
-class Item {
-  name: string
-  image: ResourceStr
-  price: number
-  discount: number
-
-  constructor(name: string, image: ResourceStr, price: number, discount: number = 0) {
-    this.name = name
-    this.image = image
-    this.price = price
-    this.discount = discount
-  }
-}
+// class Item {
+//   title: string
+//   image: ResourceStr
+//   price: number
+//   discount: number
+//
+//   constructor(title: string, image: ResourceStr, price: number, discount: number = 0) {
+//     this.title = title
+//     this.image = image
+//     this.price = price
+//     this.discount = discount
+//   }
+// }
 
 // 继承模式，只能写在全局
 @Extend(Text) function priceText(){
@@ -23,20 +25,20 @@ class Item {
 @Component
 
 export struct OrderPage {
-  @State message: string = 'Hello World'
+  // @State message: string = 'Hello World'
   // 商品数据
-  private items: Array<Item> = [
-    new Item('华为Mate60', $r('app.media.mate60'),6999, 500),
-    new Item('MateBookProX', $r('app.media.mateBookProX'),13999,300),
-    new Item('WatchGT4', $r('app.media.watchGT4'),1438),
-    new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-    new Item('Mate X5', $r('app.media.mateX5'),12999),
-    new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-    new Item('Mate X5', $r('app.media.mateX5'),12999),
-    new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-    new Item('Mate X5', $r('app.media.mateX5'),12999),
-    new Item('Mate X5', $r('app.media.mateX5'),12999)
-  ]
+  // private items: Array<Item> = [
+  //   new Item('华为Mate60', $r('app.media.mate60'),6999, 500),
+  //   new Item('MateBookProX', $r('app.media.mateBookProX'),13999,300),
+  //   new Item('WatchGT4', $r('app.media.watchGT4'),1438),
+  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
+  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
+  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
+  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
+  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
+  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
+  //   new Item('Mate X5', $r('app.media.mateX5'),12999)
+  // ]
 
 
   build() {
@@ -51,7 +53,7 @@ export struct OrderPage {
           // 商品列表部分
           List({space: 8}){
             ForEach(
-              this.items,
+              ItemData,
               (item: Item) => {
                 ListItem(){
                   this.ItemCard(item)
@@ -102,7 +104,7 @@ export struct OrderPage {
       Image(item.image)
         .width(100)
       Column({space: 4}){
-        Text(item.name)
+        Text(item.title)
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
         Text('实付款 ￥' + item.price)
