@@ -1,14 +1,14 @@
 // 不同的样式
-export class KV {
+export class ItemStyle {
   title: string = ''
   price: number = 0
-  image?: string = ''
+  image?: ResourceStr = ''
 }
 
 // 样式种类
 export class Specification {
   title: string = '';
-  data: KV[] = [];
+  data: ItemStyle[] = [];
 }
 
 // 物品

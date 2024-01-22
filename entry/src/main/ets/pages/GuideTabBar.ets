@@ -1,5 +1,5 @@
-import {Index} from '../../pages/Index'
-import {OrderPage} from '../../pages/OrderPage'
+import {Index} from './Index'
+import {OrderPage} from './OrderPage'
 
 @Entry
 @Component

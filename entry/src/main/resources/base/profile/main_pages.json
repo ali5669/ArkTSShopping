@@ -5,6 +5,7 @@
     "pages/ItemShowcase",
     "pages/CashPage",
     "pages/ItemDetail",
-    "pages/OrderPage"
+    "pages/OrderPage",
+    "pages/GuideTabBar"
   ]
 }

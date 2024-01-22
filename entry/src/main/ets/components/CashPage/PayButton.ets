@@ -1,12 +1,10 @@
-import { Item } from '../../datatype/Item'
-
 @Component
 export struct PayButton{
   @Prop quantity: number
-  @Consume chooseItem: Item
+  @Consume finalPrice: number
   build(){
     Row(){
-      Button(`支付 ￥${this.chooseItem.price * this.quantity}`)
+      Button(`支付 ￥${this.finalPrice * this.quantity}`)
         .width('90%')
         .onClick(()=>{
 

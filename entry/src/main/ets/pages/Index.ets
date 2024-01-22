@@ -75,17 +75,20 @@ export struct Index {
     .borderRadius(25)
     .margin(8)
     .onClick(()=>{
-      router.pushUrl({
-        url: 'pages/ItemDetail',
-        params:{
-          id: item.id
+      router.pushUrl(
+        {
+          url: 'pages/ItemDetail',
+          params:{
+            id: item.id
+          }
+        },
+        router.RouterMode.Single,
+        (err) => {
+          if (err) {
+            console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+          }
         }
-      },
-      (err) => {
-        if (err) {
-          console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
-        }
-      })
+      )
     })
   }
 }
