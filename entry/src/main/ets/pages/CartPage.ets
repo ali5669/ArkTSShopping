@@ -22,7 +22,7 @@ class Item {
 @Entry
 @Component
 
-export struct OrderPage {
+export struct CartPage {
   @State message: string = 'Hello World'
   // 商品数据
   private items: Array<Item> = [

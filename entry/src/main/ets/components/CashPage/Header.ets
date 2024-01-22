@@ -4,7 +4,7 @@ import router from '@ohos.router'
 @Component
 export struct Header {
   item: Item
-  @Prop quantity: number
+  quantity: number
   @Consume finalPrice: number
   build() {
     Row(){

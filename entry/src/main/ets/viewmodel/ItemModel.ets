@@ -20,3 +20,16 @@ export class Item{
   specifications? :Specification[] = []
 }
 
+// 购物车物品
+@Observed
+export class UserItem{
+  item: Item
+  quantity: number = 0
+  styles: number[] = []
+
+  constructor(item: Item, quantity: number, styles: number[]) {
+    this.item = item
+    this.quantity = quantity
+    this.styles = styles
+  }
+}
