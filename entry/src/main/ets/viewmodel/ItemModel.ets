@@ -1,6 +1,7 @@
 // 不同的样式
 export class KV {
-  title: string = '';
+  title: string = ''
+  price: number = 0
   image?: string = ''
 }
 
