@@ -39,7 +39,17 @@ struct ItemDetail {
           .fontSize(22)
           .backgroundColor('#FCBC02')
           .onClick(()=>{
-            router.back()
+            router.pushUrl({
+              url: 'pages/CashPage',
+              params:{
+                id: this.item.id
+              }
+            },
+              (err) => {
+                if (err) {
+                  console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+                }
+              })
           })
         Button('立即购买')
         .width('40%')

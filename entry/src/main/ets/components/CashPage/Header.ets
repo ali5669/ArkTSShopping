@@ -1,15 +1,19 @@
-import { Item } from '../../datatype/Item'
+import { Item, Specification, ItemStyle } from '../../viewmodel/ItemModel'
 import router from '@ohos.router'
 
 @Component
 export struct Header {
+  item: Item
   @Prop quantity: number
-  @Consume chooseItem: Item
+  @Consume finalPrice: number
   build() {
     Row(){
-      Image(this.chooseItem.image)
-        .width(70)
-      Text('￥' + this.chooseItem.price * this.quantity)
+      if(this.item.image != ''){
+        Image(this.item.image)
+          .width(70)
+      }
+
+      Text('￥' + this.finalPrice * this.quantity)
         .fontSize(45)
       Blank()
       Button(){

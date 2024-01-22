@@ -1,9 +1,10 @@
-import { Item, ShowItem } from '../datatype/Item'
-
+import { Item } from '../viewmodel/ItemModel'
+import { ItemData } from '../viewmodel/ItemData'
 import { QuantityAdjustBar } from '../components/CashPage/QuantityAdjustBar'
 import { TypeChooseList } from '../components/CashPage/TypeChooseList'
 import { PayButton } from '../components/CashPage/PayButton'
 import { Header } from '../components/CashPage/Header'
+import router from '@ohos.router'
 
 @Styles function cardStyle() {
   .width('95%')
@@ -16,22 +17,16 @@ import { Header } from '../components/CashPage/Header'
 @Entry
 @Component
 struct CashPage {
-  private showItem: ShowItem = new ShowItem(
-    new Item('抽纸', $r('app.media.paper'), 15),
-    [
-      new Item('抽纸1', $r('app.media.paper'), 15.5),
-      new Item('抽纸2', $r('app.media.paper'), 25),
-      new Item('抽纸3', $r('app.media.paper'), 35)
-    ]
-  )
-  @Provide chooseItem: Item = this.showItem.itemType[0]
+  @State params: any = router.getParams()
+  @State item: Item = ItemData.find(item => item.id == this.params.id)
   @State quantity: number = 1
+  @Provide finalPrice: number = this.item.price
 
   build() {
     Column() {
 
       // brief introduction and back button
-      Header({ quantity: this.quantity })
+      Header({item: this.item, quantity: this.quantity })
 
 
       // address configuration row
@@ -42,7 +37,7 @@ struct CashPage {
 
       // type choose row
       Row() {
-        TypeChooseList({ showItem: this.showItem })
+        TypeChooseList({item: this.item})
       }
       .cardStyle()
 
