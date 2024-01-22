@@ -1,23 +1,12 @@
 import router from '@ohos.router'
-import { Item} from '../datatype/Item'
+// import {Item} from '../datatype/Item'
+import {Item} from '../viewmodel/ItemModel'
+import {ItemData} from '../viewmodel/ItemData'
 
 @Entry
 @Component
 export struct Index {
-  private ItemList:Item[]=[
-    new Item('抽纸',$r('app.media.paper'),15.5),
-    new Item('华为Mate60', $r('app.media.mate60'),6999),
-    new Item('MateBookProX', $r('app.media.mateBookProX'),13999),
-    new Item('WatchGT4', $r('app.media.watchGT4'),1438),
-    new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-    new Item('Mate X5', $r('app.media.mateX5'),12999),
-    new Item('抽纸',$r('app.media.paper'),15.5),
-    new Item('华为Mate60', $r('app.media.mate60'),6999),
-    new Item('MateBookProX', $r('app.media.mateBookProX'),13999),
-    new Item('WatchGT4', $r('app.media.watchGT4'),1438),
-    new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-    new Item('Mate X5', $r('app.media.mateX5'),12999)
-  ]
+
   @Styles fillScreen(){
     .width('100%')
     .backgroundColor('#EFEFEF')
@@ -44,7 +33,7 @@ export struct Index {
       }
       Row(){
         Swiper(){
-          ForEach(this.ItemList,(item:Item)=>{
+          ForEach(ItemData,(item:Item)=>{
             Image(item.image)
           })
         }
@@ -55,7 +44,7 @@ export struct Index {
 
       }
       List(){
-        ForEach(this.ItemList,(item:Item)=>{
+        ForEach(ItemData,(item:Item)=>{
           this.Items(item)
         })
       }
@@ -71,7 +60,7 @@ export struct Index {
         .height(100)
         .objectFit(ImageFit.Contain)
       Column(){
-        Text(item.name)
+        Text(item.title)
           .maxLines(2)
           .fontSize(18)
           .fontWeight(FontWeight.Bold)
@@ -86,7 +75,17 @@ export struct Index {
     .borderRadius(25)
     .margin(8)
     .onClick(()=>{
-      // router.pushUrl()
+      router.pushUrl({
+        url: 'pages/ItemDetail',
+        params:{
+          id: item.id
+        }
+      },
+      (err) => {
+        if (err) {
+          console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+        }
+      })
     })
   }
 }
