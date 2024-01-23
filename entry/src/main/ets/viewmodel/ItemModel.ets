@@ -21,3 +21,9 @@ export class Item{
   reviews?:String[]=[]
 }
 
+// 购物车物品
+export class CartItem{
+  item: Item
+  specifications? : number[] = []
+  quantity: number
+}
