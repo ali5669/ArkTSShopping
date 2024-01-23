@@ -5,10 +5,7 @@ export struct TypeChooseList{
   item: Item
   @State currentIndices: number[] = []
   @Consume finalPrice: number
-
-  constructor(item: Item) {
-    super()
-    this.item = item
+  aboutToAppear(){
     for (let index = 0; index < this.item.specifications.length; index++) {
       this.currentIndices.push(0)
     }
