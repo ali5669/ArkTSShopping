@@ -91,8 +91,8 @@ export struct CartPage {
         Text(item.title)
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
-          Text('￥' + item.price)
-            .priceText()
+        Text('￥' + item.price)
+          .priceText()
       }
       .height('100%')
       .alignItems(HorizontalAlign.Start)

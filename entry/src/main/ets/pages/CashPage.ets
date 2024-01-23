@@ -30,6 +30,7 @@ export struct CashPage {
   // 加入购物车按钮被点下时
   onCartButtonClicked(){
     this.localDataManager.insertShopCart(this.item.id, this.styles, this.quantity)
+    router.back()
   }
 
   // 商品特殊类型变更时
