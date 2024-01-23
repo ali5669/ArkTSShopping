@@ -3,6 +3,9 @@ import {OrderPage} from './OrderPage'
 import {CartPage} from './CartPage'
 import router from '@ohos.router'
 
+import {LocalDataManager} from '../utils/LocalDataManager'
+import { CartItem } from '../viewmodel/ItemModel'
+
 @Entry
 @Component
 struct GuideTabBar {
@@ -12,6 +15,13 @@ struct GuideTabBar {
   @State selectedFontColor: string = '#007DFF'
   @State currentIndex: number = 0
   private controller: TabsController = new TabsController()
+
+  private localDataManager: LocalDataManager = LocalDataManager.instance()
+  @State shopCart: CartItem[] = []
+
+  onPageShow(){
+    this.shopCart = this.localDataManager.queryShopCart()
+  }
 
   @Builder TabBuilder(index: number, name: string) {
     Column() {
@@ -31,7 +41,7 @@ struct GuideTabBar {
         }.tabBar(this.TabBuilder(0, '首页'))
 
         TabContent() {
-          CartPage({username: this.param.username}).width('100%').height('100%')
+          CartPage({username: this.param.username, cartItems: $shopCart}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(1, '购物车'))
 
         TabContent() {

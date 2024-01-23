@@ -5,6 +5,8 @@ export struct TypeChooseList{
   item: Item
   @State currentIndices: number[] = []
   @Consume finalPrice: number
+
+  onStylesChanged: (currentStyles: number[]) => void
   aboutToAppear(){
     for (let index = 0; index < this.item.specifications.length; index++) {
       this.currentIndices.push(0)
@@ -53,6 +55,7 @@ export struct TypeChooseList{
     for (let index = 0; index < this.item.specifications.length; index++) {
       this.finalPrice += this.item.specifications[index].data[this.currentIndices[index]].price
     }
+    this.onStylesChanged(this.currentIndices)
   }
 }
 

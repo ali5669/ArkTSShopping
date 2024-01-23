@@ -1,6 +1,7 @@
 import {Header} from '../common/components/CommonComponents'
-import {Item} from '../viewmodel/ItemModel'
+import {CartItem, Item} from '../viewmodel/ItemModel'
 import {ItemData} from '../viewmodel/ItemData'
+import { LocalDataManager } from '../utils/LocalDataManager'
 
 
 
@@ -14,7 +15,12 @@ import {ItemData} from '../viewmodel/ItemData'
 export struct CartPage {
   @State message: string = 'Hello World'
   private username:string
+  private localDataManager: LocalDataManager = LocalDataManager.instance()
+  @Link cartItems: CartItem[]
 
+  onPageShow(){
+    this.cartItems = this.localDataManager.queryShopCart()
+  }
 
   build() {
     Column() {
@@ -24,10 +30,10 @@ export struct CartPage {
       // 商品列表部分
       List({space: 8}){
         ForEach(
-          ItemData,
-          (item: Item) => {
+          this.cartItems,
+          (cartItem: CartItem) => {
             ListItem(){
-              this.ItemCard(item)
+              this.ItemCard(cartItem.item)
             }
           }
         )
@@ -82,25 +88,6 @@ export struct CartPage {
       Image(item.image)
         .width(100)
       Column({space: 4}){
-        // if(item.discount){
-        //   Text(item.title)
-        //     .fontSize(20)
-        //     .fontWeight(FontWeight.Bold)
-        //   Text('原价：￥' + item.price)
-        //     .fontColor('#CCC')
-        //     .fontSize(14)
-        //     .decoration({type: TextDecorationType.LineThrough})
-        //   Text('折扣价：￥' + (item.price - item.discount))
-        //     .priceText()
-        //   Text('补贴：￥' + item.discount)
-        //     .priceText()
-        // }else{
-        //   Text(item.title)
-        //     .fontSize(20)
-        //     .fontWeight(FontWeight.Bold)
-        //   Text('￥' + item.price)
-        //     .priceText()
-        // }
         Text(item.title)
             .fontSize(20)
             .fontWeight(FontWeight.Bold)

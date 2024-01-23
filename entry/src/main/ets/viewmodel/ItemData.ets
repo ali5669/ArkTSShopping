@@ -127,7 +127,7 @@ export const ItemData: Item[] = [
   {
     id: '7',
     title: 'RX 580',
-    image:('https://cdn.sapphiretech.com.cn/assets/consumer/11265_14_48_NITRO_RX_580_8G_G5_OC_C/11265_14_RX580_NITRO_plus_OC_8GB_800x500_01_C.png'),
+    image:($r('app.media.11265_14_RX580_NITRO_plus_OC_8GB_800x500_01_C')),
     price: 200,
     specifications: [
       { title: '样式',
@@ -163,7 +163,7 @@ export const ItemData: Item[] = [
   {
     id: '9',
     title: '吹雪Z690-A',
-    image: ('https://dlcdnwebimgs.asus.com.cn/gain/909D2123-4FEC-45C1-8F3B-C21E98EEAC3E/w717/h525'),
+    image: ($r('app.media.h525')),
     price: 2499,
     specifications: [
       { title: '样式',
@@ -182,7 +182,7 @@ export const ItemData: Item[] = [
   {
     id: '10',
     title: 'Arona',
-    image: ('https://cdnimg.gamekee.com/wiki2.0/images/w_252/h_204/829/43637/2022/6/2/909433.png'),
+    image: ($r('app.media.arona')),
     price: 19999,
     specifications: [
       { title: '样式',
