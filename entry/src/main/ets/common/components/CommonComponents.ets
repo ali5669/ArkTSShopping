@@ -3,7 +3,7 @@ import router from '@ohos.router'
 @Component
 export struct Header{
   private title: ResourceStr
-  @State params: any = router.getParams()
+  private username:string
   build(){
     // 标题部分
     Row({space: 5}){
@@ -18,8 +18,8 @@ export struct Header{
           // 返回上一页
           router.back()
         })
-      if(this.params && this.title){
-        Text(this.params.id + '.' + this.title)
+      if(this.username && this.title){
+        Text(this.username + '.' + this.title)
           .fontSize(28)
           .fontWeight(FontWeight.Bold)
       }

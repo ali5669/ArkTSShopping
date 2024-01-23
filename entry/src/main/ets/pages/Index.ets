@@ -3,17 +3,15 @@ import router from '@ohos.router'
 import {Item} from '../viewmodel/ItemModel'
 import {ItemData} from '../viewmodel/ItemData'
 
-@Entry
 @Component
 export struct Index {
-
+  private username:string
   @Styles fillScreen(){
     .width('100%')
     .backgroundColor('#EFEFEF')
     .padding(30)
   }
-  // @State param:any=router.getParams()
-  username:string='test'
+
   build() {
     Column(){
       Row(){
