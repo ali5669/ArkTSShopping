@@ -9,9 +9,8 @@ import {ItemData} from '../viewmodel/ItemData'
   .fontColor('#F36')
   .fontSize(18)
 }
-@Entry
-@Component
 
+@Component
 export struct CartPage {
   @State message: string = 'Hello World'
   private username:string
