@@ -9,18 +9,17 @@ import {ItemData} from '../viewmodel/ItemData'
   .fontColor('#F36')
   .fontSize(18)
 }
-@Entry
-@Component
 
+@Component
 export struct CartPage {
   @State message: string = 'Hello World'
-  // 商品数据
+  private username:string
 
 
   build() {
     Column() {
       // 标题部分
-      Header({title: '购物车'})
+      Header({title: '购物车', username: this.username})
         .margin({bottom: 20})
       // 商品列表部分
       List({space: 8}){

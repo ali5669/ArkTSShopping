@@ -1,10 +1,13 @@
 import {Index} from './Index'
 import {OrderPage} from './OrderPage'
 import {CartPage} from './CartPage'
+import router from '@ohos.router'
 
 @Entry
 @Component
 struct GuideTabBar {
+  @State param:any=router.getParams()
+
   @State fontColor: string = '#182431'
   @State selectedFontColor: string = '#007DFF'
   @State currentIndex: number = 0
@@ -24,15 +27,15 @@ struct GuideTabBar {
     Column() {
       Tabs({ barPosition: BarPosition.End, controller: this.controller }) {
         TabContent() {
-          Index().width('100%').height('100%')
+          Index({username: this.param.username}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(0, '首页'))
 
         TabContent() {
-          CartPage().width('100%').height('100%')
+          CartPage({username: this.param.username}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(1, '购物车'))
 
         TabContent() {
-          OrderPage().width('100%').height('100%')
+          OrderPage({username: this.param.username}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(2, '我的订单'))
       }
       .vertical(false)

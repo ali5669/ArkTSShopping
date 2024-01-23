@@ -25,27 +25,13 @@ import {ItemData} from '../viewmodel/ItemData'
 @Component
 
 export struct OrderPage {
-  // @State message: string = 'Hello World'
-  // 商品数据
-  // private items: Array<Item> = [
-  //   new Item('华为Mate60', $r('app.media.mate60'),6999, 500),
-  //   new Item('MateBookProX', $r('app.media.mateBookProX'),13999,300),
-  //   new Item('WatchGT4', $r('app.media.watchGT4'),1438),
-  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
-  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
-  //   new Item('FreeBuds Pro3', $r('app.media.freeBudsPro3'),1499),
-  //   new Item('Mate X5', $r('app.media.mateX5'),12999),
-  //   new Item('Mate X5', $r('app.media.mateX5'),12999)
-  // ]
-
+  private username:string
 
   build() {
 
     Column() {
       // 标题部分
-      Header({title: '订单'})
+      Header({title: '订单', username: this.username})
         .margin({bottom: 20})
 
       Tabs({ barPosition: BarPosition.Start }) {

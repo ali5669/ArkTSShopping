@@ -1,11 +1,8 @@
 {
   "src": [
-    "pages/Index",
     "pages/Login",
-    "pages/ItemShowcase",
     "pages/CashPage",
     "pages/ItemDetail",
-    "pages/OrderPage",
     "pages/GuideTabBar"
   ]
 }

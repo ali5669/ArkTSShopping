@@ -45,7 +45,6 @@ struct Login {
           .fontSize(25)
           .fontWeight(FontWeight.Bold)
         TextInput({placeholder:'请输入注册时的账号'})
-          .type(InputType.Number)
           .onChange((value)=>{
             this.tempUsername=value
           })
@@ -94,7 +93,7 @@ struct Login {
             else{
               this.userName=this.tempUsername
               router.replaceUrl({
-                url:'pages/Index',
+                url:'pages/GuideTabBar',
                 params:{username:this.tempUsername}
               })
             }
