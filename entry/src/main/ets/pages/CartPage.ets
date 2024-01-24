@@ -33,6 +33,7 @@ export struct CartPage {
           this.cartItems,
           (cartItem: CartItem) => {
             ListItem(){
+              //TODO 修改接口，直接传 cartItem
               this.ItemCard(cartItem.item)
             }
           }
@@ -76,6 +77,7 @@ export struct CartPage {
 
   // 局部自定义构建函数
   @Builder ItemCard(item: Item){
+    //TODO 显示 cardItem 的 quantity 在最右侧（物品数量），并且能够统计总金额
     Row({space: 10}){
       Checkbox()
         // .select(this.item.finished)
