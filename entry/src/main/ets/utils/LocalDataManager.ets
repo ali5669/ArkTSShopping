@@ -33,11 +33,7 @@ export class LocalDataManager{
 
   insertShopCart(id: string, styles: number[], quantity: number){
     const item = this.queryItemListById(id)
-    const cartItem: CartItem = {
-      item: item,
-      specifications: styles,
-      quantity: quantity
-    }
+    const cartItem: CartItem = new CartItem(item, quantity, styles)
     this.shopCartData.splice(0, 0, cartItem)
   }
 
