@@ -25,9 +25,10 @@ struct ItemDetail {
             .constraintSize({maxHeight:'60%'})
             //价格
             Row(){
-              Text('￥'+this.item.price)
+              Text('￥').fontColor('#F36').fontSize(20)
+              Text(this.item.price.toString())
                 .fontColor('#F36')
-                .fontSize(20)
+                .fontSize(30)
             }
             .width('90%')
             .margin({bottom:20})
@@ -57,12 +58,23 @@ struct ItemDetail {
               ForEach(
                 this.item.reviews,
                 review=>{
-                  Row(){
-                    Text(review)
-                      .fontSize(18)
+                  Column(){
+                    Row(){
+                      Image('https://gss0.baidu.com/7Ls0a8Sm2Q5IlBGlnYG/sys/portrait/item/tb.1.a42fa7ce.bykn0EcByn6twgkK4Pkqbg?t=1644596826')
+                        .width(35).padding(5)
+                      Text('匿名买家').margin({left:10})
+                    }.width('90%')
+
+                    Row(){
+                      Text(review)
+                        .fontSize(18)
+                    }
+                    .width('80%')
+                    .margin({bottom:10})
                   }
-                  .width('80%')
-                  .margin({bottom:10})
+                  .backgroundColor('#F8F8F8')
+                  .border({width:9,color:"#F8F8F8",radius:10})
+                  .margin({bottom:15})
                 }
               )
             }
