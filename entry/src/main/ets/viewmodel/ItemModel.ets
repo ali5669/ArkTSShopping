@@ -44,7 +44,35 @@ export class CartItem{
   }
 
   // 获取物品总价
-  getTotalPrice(){
+  getTotalPrice(): number{
+    return this.quantity * this.getPrice()
+  }
+}
+
+// 订单物品
+export class OrderItem{
+  item: Item
+  quantity: number
+  styles? : number[] = []
+
+
+  constructor(item: Item, quantity: number, styles?: number[]) {
+    this.item = item
+    this.quantity = quantity
+    this.styles = styles
+  }
+
+  // 获取物品单价
+  getPrice(): number{
+    let price = this.item.price
+    for (let index = 0; index < this.styles.length; index++) {
+      price += this.item.specifications[index].data[this.styles[index]].price
+    }
+    return price
+  }
+
+  // 获取物品总价
+  getTotalPrice(): number{
     return this.quantity * this.getPrice()
   }
 }

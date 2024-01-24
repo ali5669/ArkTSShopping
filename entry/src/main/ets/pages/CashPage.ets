@@ -33,6 +33,12 @@ export struct CashPage {
     router.back()
   }
 
+  // 结算按钮被点下时
+  onCashButtonClicked(){
+    this.localDataManager.insertOrderList(this.item.id, this.styles, this.quantity)
+    router.back()
+  }
+
   // 商品特殊类型变更时
   onStylesChanged(currentStyles: number[]){
     this.styles = currentStyles.slice()
@@ -70,10 +76,15 @@ export struct CashPage {
 
       Blank()
       if(this.params.type == 0){
-        AddButton({onClicked: () => this.onCartButtonClicked()})
+        AddButton({
+          onClicked: () => this.onCartButtonClicked()
+        })
       }
       else{
-        PayButton({ quantity: this.quantity })
+        PayButton({
+          quantity: this.quantity,
+          onClicked: () => this.onCashButtonClicked()
+        })
       }
 
     }

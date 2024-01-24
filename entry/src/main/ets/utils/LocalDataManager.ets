@@ -1,10 +1,10 @@
-import {CartItem, Item} from '../viewmodel/ItemModel'
+import {CartItem, Item, OrderItem} from '../viewmodel/ItemModel'
 import {ItemData} from '../viewmodel/ItemData'
 
 export class LocalDataManager{
   private static localDataManager: LocalDataManager
   private shopCartData: CartItem[] = []
-  private orderData: Item[] = []
+  private orderData: OrderItem[] = []
 
   private constructor() {
 
@@ -39,5 +39,11 @@ export class LocalDataManager{
 
   queryOrderList(){
     return this.orderData
+  }
+
+  insertOrderList(id: string, styles: number[], quantity: number){
+    const item = this.queryItemListById(id)
+    const orderItem: OrderItem = new OrderItem(item, quantity, styles)
+    this.orderData.splice(0, 0, orderItem)
   }
 }

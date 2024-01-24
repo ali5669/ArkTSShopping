@@ -4,7 +4,7 @@ import {CartPage} from './CartPage'
 import router from '@ohos.router'
 
 import {LocalDataManager} from '../utils/LocalDataManager'
-import { CartItem } from '../viewmodel/ItemModel'
+import { CartItem, OrderItem } from '../viewmodel/ItemModel'
 
 @Entry
 @Component
@@ -18,9 +18,11 @@ struct GuideTabBar {
 
   private localDataManager: LocalDataManager = LocalDataManager.instance()
   @State shopCart: CartItem[] = []
+  @State orderList: OrderItem[] = []
 
   onPageShow(){
     this.shopCart = this.localDataManager.queryShopCart()
+    this.orderList = this.localDataManager.queryOrderList()
   }
 
   @Builder TabBuilder(index: number, name: string) {
@@ -41,11 +43,11 @@ struct GuideTabBar {
         }.tabBar(this.TabBuilder(0, '首页'))
 
         TabContent() {
-          CartPage({username: this.param.username, cartItems: $shopCart}).width('100%').height('100%')
+          CartPage({username: this.param.username, cartList: $shopCart}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(1, '购物车'))
 
         TabContent() {
-          OrderPage({username: this.param.username}).width('100%').height('100%')
+          OrderPage({username: this.param.username, orderList: $orderList}).width('100%').height('100%')
         }.tabBar(this.TabBuilder(2, '我的订单'))
       }
       .vertical(false)

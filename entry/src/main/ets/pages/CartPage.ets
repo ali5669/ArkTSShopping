@@ -16,10 +16,10 @@ export struct CartPage {
   @State message: string = 'Hello World'
   private username:string
   private localDataManager: LocalDataManager = LocalDataManager.instance()
-  @Link cartItems: CartItem[]
+  @Link cartList: CartItem[]
 
   onPageShow(){
-    this.cartItems = this.localDataManager.queryShopCart()
+    this.cartList = this.localDataManager.queryShopCart()
   }
 
   build() {
@@ -30,7 +30,7 @@ export struct CartPage {
       // 商品列表部分
       List({space: 8}){
         ForEach(
-          this.cartItems,
+          this.cartList,
           (cartItem: CartItem) => {
             ListItem(){
               //TODO 修改接口，直接传 cartItem
