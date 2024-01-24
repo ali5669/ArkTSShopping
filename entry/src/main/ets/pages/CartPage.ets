@@ -1,7 +1,6 @@
 import {Header} from '../common/components/CommonComponents'
-import {CartItem, Item} from '../viewmodel/ItemModel'
-import {ItemData} from '../viewmodel/ItemData'
-import { LocalDataManager } from '../utils/LocalDataManager'
+import {CartItem, Item, OrderItem} from '../viewmodel/ItemModel'
+import { LocalDataManager } from '../viewmodel/LocalDataManager'
 
 
 
@@ -17,9 +16,30 @@ export struct CartPage {
   private username:string
   private localDataManager: LocalDataManager = LocalDataManager.instance()
   @Link cartList: CartItem[]
+  @Link orderList: OrderItem[]
+  @State selectList: boolean[] = []
+
+  private onRefresh?: () => void
+
+  aboutToAppear(){
+    for (let index = 0; index < this.cartList.length; index++) {
+      this.selectList.push(false)
+    }
+  }
 
   onPageShow(){
-    this.cartList = this.localDataManager.queryShopCart()
+    this.cartList = this.localDataManager.queryCartList()
+    for (let index = 0; index < this.cartList.length; index++) {
+      this.selectList[index] = false
+    }
+  }
+
+  refreshCartPage(){
+    if(this.onRefresh){
+      this.onRefresh()
+    }
+    //TODO: 添加重新计算总和的函数
+
   }
 
   build() {
@@ -31,10 +51,10 @@ export struct CartPage {
       List({space: 8}){
         ForEach(
           this.cartList,
-          (cartItem: CartItem) => {
+          (cartItem: CartItem, index: number) => {
             ListItem(){
               //TODO 修改接口，直接传 cartItem
-              this.ItemCard(cartItem.item)
+              this.ItemCard(cartItem.item, index)
             }
           }
         )
@@ -53,7 +73,8 @@ export struct CartPage {
         Button(`总计 ￥110`)
           .width('40%')
           .onClick(()=>{
-
+            this.onCashButtonClick()
+            this.refreshCartPage()
           })
       }
       .padding({bottom: 10})
@@ -75,17 +96,27 @@ export struct CartPage {
     .padding(20)
   }
 
+  onCashButtonClick(){
+    let ids = []
+    for (let index = 0; index < this.selectList.length; index++) {
+      if(this.selectList[index]){
+        console.log(index.toString())
+        let cartItem = this.cartList[index]
+        this.localDataManager.insertOrderFromCart(cartItem)
+        ids.push(cartItem.item.id)
+      }
+    }
+    this.localDataManager.deleteCart(ids)
+  }
+
   // 局部自定义构建函数
-  @Builder ItemCard(item: Item){
+  @Builder ItemCard(item: Item, index: number){
     //TODO 显示 cardItem 的 quantity 在最右侧（物品数量），并且能够统计总金额
     Row({space: 10}){
       Checkbox()
-        // .select(this.item.finished)
+        .select(this.selectList[index])
         .onChange(val => {
-          // 1.更新当前任务状态
-          // this.item.finished = val
-          // // 2.更新已完成任务数量
-          // this.onTaskChange()
+          this.selectList[index] = val
         })
       Image(item.image)
         .width(100)

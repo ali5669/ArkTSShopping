@@ -1,7 +1,7 @@
 import {Header} from '../common/components/CommonComponents'
 import {Item, OrderItem} from '../viewmodel/ItemModel'
 import {ItemData} from '../viewmodel/ItemData'
-import { LocalDataManager } from '../utils/LocalDataManager'
+import { LocalDataManager } from '../viewmodel/LocalDataManager'
 
 // 继承模式，只能写在全局
 @Extend(Text) function priceText(){

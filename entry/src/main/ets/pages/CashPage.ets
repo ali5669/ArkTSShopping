@@ -6,7 +6,7 @@ import { PayButton } from '../components/CashPage/PayButton'
 import { AddButton } from '../components/CashPage/AddButton'
 import { Header } from '../components/CashPage/Header'
 import router from '@ohos.router'
-import { LocalDataManager } from '../utils/LocalDataManager'
+import { LocalDataManager } from '../viewmodel/LocalDataManager'
 
 @Styles function cardStyle() {
   .width('95%')
@@ -29,13 +29,13 @@ export struct CashPage {
 
   // 加入购物车按钮被点下时
   onCartButtonClicked(){
-    this.localDataManager.insertShopCart(this.item.id, this.styles, this.quantity)
+    this.localDataManager.insertCart(this.item.id, this.quantity, this.styles)
     router.back()
   }
 
   // 结算按钮被点下时
   onCashButtonClicked(){
-    this.localDataManager.insertOrderList(this.item.id, this.styles, this.quantity)
+    this.localDataManager.insertOrder(this.item.id, this.quantity, this.styles)
     router.back()
   }
 

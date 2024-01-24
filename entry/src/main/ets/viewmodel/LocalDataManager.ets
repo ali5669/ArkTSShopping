@@ -1,9 +1,9 @@
-import {CartItem, Item, OrderItem} from '../viewmodel/ItemModel'
-import {ItemData} from '../viewmodel/ItemData'
+import {CartItem, Item, OrderItem} from './ItemModel'
+import {ItemData} from './ItemData'
 
 export class LocalDataManager{
   private static localDataManager: LocalDataManager
-  private shopCartData: CartItem[] = []
+  private cartList: CartItem[] = []
   private orderData: OrderItem[] = []
 
   private constructor() {
@@ -27,23 +27,40 @@ export class LocalDataManager{
     return result
   }
 
-  queryShopCart(){
-    return this.shopCartData
+  queryCartList(){
+    return this.cartList
   }
 
-  insertShopCart(id: string, styles: number[], quantity: number){
+  insertCart(id: string, quantity: number, styles?: number[]){
     const item = this.queryItemListById(id)
     const cartItem: CartItem = new CartItem(item, quantity, styles)
-    this.shopCartData.splice(0, 0, cartItem)
+    this.cartList.splice(0, 0, cartItem)
+  }
+
+  deleteCart(ids: string[]){
+    ids.forEach(id => {
+      const result = this.cartList.filter((cartItem: CartItem) => cartItem.item.id == id)
+      if(result.length > 0){
+        this.cartList.splice(this.cartList.indexOf(result[0]), 1)
+      }
+    });
   }
 
   queryOrderList(){
     return this.orderData
   }
 
-  insertOrderList(id: string, styles: number[], quantity: number){
+  insertOrder(id: string, quantity: number, styles?: number[]){
     const item = this.queryItemListById(id)
     const orderItem: OrderItem = new OrderItem(item, quantity, styles)
     this.orderData.splice(0, 0, orderItem)
+  }
+
+  insertOrderFromCart(cartItem: CartItem){
+    this.insertOrder(
+      cartItem.item.id,
+      cartItem.quantity,
+      cartItem.styles
+    )
   }
 }
