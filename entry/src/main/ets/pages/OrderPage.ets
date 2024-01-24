@@ -1,31 +1,23 @@
 import {Header} from '../common/components/CommonComponents'
-import {Item} from '../viewmodel/ItemModel'
+import {Item, OrderItem} from '../viewmodel/ItemModel'
 import {ItemData} from '../viewmodel/ItemData'
-
-// class Item {
-//   title: string
-//   image: ResourceStr
-//   price: number
-//   discount: number
-//
-//   constructor(title: string, image: ResourceStr, price: number, discount: number = 0) {
-//     this.title = title
-//     this.image = image
-//     this.price = price
-//     this.discount = discount
-//   }
-// }
+import { LocalDataManager } from '../viewmodel/LocalDataManager'
 
 // 继承模式，只能写在全局
 @Extend(Text) function priceText(){
   .fontColor('#F36')
   .fontSize(18)
 }
-@Entry
-@Component
 
+@Component
 export struct OrderPage {
   private username:string
+  private localDataManager: LocalDataManager = LocalDataManager.instance()
+  @Link orderList: OrderItem[]
+
+  onPageShow(){
+    this.orderList = this.localDataManager.queryOrderList()
+  }
 
   build() {
 
@@ -39,10 +31,10 @@ export struct OrderPage {
           // 商品列表部分
           List({space: 8}){
             ForEach(
-              ItemData,
-              (item: Item) => {
+              this.orderList,
+              (orderItem: OrderItem) => {
                 ListItem(){
-                  this.ItemCard(item)
+                  this.ItemCard(orderItem.item)
                 }
               }
             )
