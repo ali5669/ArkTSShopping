@@ -14,6 +14,23 @@ export struct Index {
     .padding(30)
   }
 
+  onItemClick(item: Item){
+    router.pushUrl(
+      {
+        url: 'pages/ItemDetail',
+        params:{
+          id: item.id
+        }
+      },
+      router.RouterMode.Single,
+      (err) => {
+        if (err) {
+          console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+        }
+      }
+    )
+  }
+
   build() {
     Column(){
       Row(){
@@ -68,6 +85,7 @@ export struct Index {
         Swiper(){
           ForEach(ItemData,(item:Item)=>{
             Image(item.image)
+              .onClick(()=>this.onItemClick(item))
           })
         }
         .index(0)
@@ -109,20 +127,7 @@ export struct Index {
     .borderRadius(25)
     .margin(8)
     .onClick(()=>{
-      router.pushUrl(
-        {
-          url: 'pages/ItemDetail',
-          params:{
-            id: item.id
-          }
-        },
-        router.RouterMode.Single,
-        (err) => {
-          if (err) {
-            console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
-          }
-        }
-      )
+      this.onItemClick(item)
     })
   }
 }

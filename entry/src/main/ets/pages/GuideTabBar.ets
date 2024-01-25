@@ -12,7 +12,7 @@ struct GuideTabBar {
   @State param:any=router.getParams()
 
   @State fontColor: string = '#182431'
-  @State selectedFontColor: string = '#007DFF'
+  @State selectedFontColor: string = '#ffff0000'
   @State currentIndex: number = 0
   private controller: TabsController = new TabsController()
 
@@ -32,8 +32,11 @@ struct GuideTabBar {
   }
 
 
-  @Builder TabBuilder(index: number, name: string) {
+  @Builder TabBuilder(index: number, name: string, img: ResourceStr, fc_img: ResourceStr) {
     Column() {
+      Image(this.currentIndex === index ? fc_img : img)
+        .width(24)
+        .margin({bottom: 4})
       Text(name)
         .fontColor(this.currentIndex === index ? this.selectedFontColor : this.fontColor)
         .fontSize(16)
@@ -47,7 +50,7 @@ struct GuideTabBar {
       Tabs({ barPosition: BarPosition.End, controller: this.controller }) {
         TabContent() {
           Index({username: this.param.username}).width('100%').height('100%')
-        }.tabBar(this.TabBuilder(0, '首页'))
+        }.tabBar(this.TabBuilder(0, '首页', $r('app.media.ic_home_normal'), $r('app.media.ic_home_focus')))
 
         TabContent() {
           CartPage({
@@ -57,16 +60,16 @@ struct GuideTabBar {
           })
             .width('100%')
             .height('100%')
-        }.tabBar(this.TabBuilder(1, '购物车'))
+        }.tabBar(this.TabBuilder(1, '购物车', $r('app.media.ic_cart_normal'), $r('app.media.ic_cart_focus')))
 
         TabContent() {
           OrderPage({username: this.param.username, orderList: $orderList}).width('100%').height('100%')
-        }.tabBar(this.TabBuilder(2, '我的订单'))
+        }.tabBar(this.TabBuilder(2, '我的订单', $r('app.media.ic_personal_normal'), $r('app.media.ic_personal_focus')))
       }
       .vertical(false)
       .barMode(BarMode.Fixed)
-      .barHeight(56)
-      .animationDuration(400)
+      .barHeight(60)
+      .animationDuration(200)
       .onChange((index: number) => {
         this.currentIndex = index
       })
