@@ -84,6 +84,7 @@ export struct Index {
       .lanes(2)
       .width('95%')
       .height('100%')
+      .layoutWeight(1)
     }
   }
   @Builder Items(item:Item){
