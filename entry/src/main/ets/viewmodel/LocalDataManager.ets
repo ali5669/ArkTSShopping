@@ -31,6 +31,13 @@ export class LocalDataManager{
     this.userData.addressList.splice(0, 0, address)
   }
 
+  deleteAddress(str: string){
+    const result = this.userData.addressList.filter((address: string) => address.includes(str))
+    if(result.length > 0){
+      this.userData.addressList.splice(this.userData.addressList.indexOf(result[0]), 1)
+    }
+  }
+
   queryItemList() {
     return ItemData
   }

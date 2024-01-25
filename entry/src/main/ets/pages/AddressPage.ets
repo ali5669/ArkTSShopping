@@ -55,7 +55,8 @@ struct AddressPage {
                   .backgroundColor('#39C5BB')
                   .margin(5)
                   .onClick(()=>{
-                    this.testAddressList.splice(index,1)
+                    this.localDataManager.deleteAddress(address)
+                    this.refresh()
                   })
 
               }
