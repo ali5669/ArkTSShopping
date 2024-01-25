@@ -6,6 +6,8 @@ import {ItemData} from '../viewmodel/ItemData'
 @Component
 export struct Index {
   private username:string
+  private searchText:string
+
   @Styles fillScreen(){
     .width('100%')
     .backgroundColor('#EFEFEF')
@@ -23,6 +25,39 @@ export struct Index {
       .height(25)
       Row(){
         Column(){
+          Row() {
+            Image($r('app.media.search1')).width(30)
+            TextInput({placeholder:'输入搜索内容'})
+              .width(200)
+              .backgroundColor('#FFFFFF')
+              .onChange(value=>{
+                this.searchText=value
+              })
+
+            Button('搜索')
+              .backgroundColor('#F8332D')
+              .onClick(()=>{
+                router.pushUrl(
+                  {
+                    url: 'pages/ItemShowcase',
+                    params:{
+                      text: this.searchText
+                    }
+                  },
+                  router.RouterMode.Single,
+                  (err) => {
+                    if (err) {
+                      console.error(`路由失败, errcode: ${err.code}, errMsg: ${err.message}`);
+                    }
+                  }
+                )
+              })
+
+          }
+          .justifyContent(FlexAlign.SpaceBetween)
+          .width('90%')
+
+
           Text('商品热卖中！')
             .fontWeight(FontWeight.Bold)
             .fontSize(30)
