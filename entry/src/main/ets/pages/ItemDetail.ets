@@ -60,7 +60,7 @@ struct ItemDetail {
                 review=>{
                   Column(){
                     Row(){
-                      Image('https://gss0.baidu.com/7Ls0a8Sm2Q5IlBGlnYG/sys/portrait/item/tb.1.a42fa7ce.bykn0EcByn6twgkK4Pkqbg?t=1644596826')
+                      Image($r('app.media.touxiang'))
                         .width(35).padding(5)
                       Text('匿名买家').margin({left:10})
                     }.width('90%')
