@@ -20,6 +20,15 @@ struct AddressPage {
       }
     })
   }
+
+  aboutToAppear(){
+    this.localDataManager.initUserData('wang', '123')
+  }
+
+  refresh(){
+    this.testAddressList = this.localDataManager.queryUserData().addressList
+  }
+
   build() {
     Column(){
       Text('地址列表')
@@ -78,9 +87,11 @@ struct AddressPage {
           .type(ButtonType.Circle)
           .backgroundColor('#39C5BB')
           .onClick(()=>{
-            // this.localDataManager.insertAddress(this.tempAddress)
+
             if(this.tempAddress.length<=20&&this.tempAddress.length>0){
-              this.testAddressList.push(this.tempAddress)
+              // this.testAddressList.push(this.tempAddress)
+              this.localDataManager.insertAddress(this.tempAddress)
+              this.refresh()
             }
             else{
               this.alert('输入地址过长，请重新输入！')

@@ -18,11 +18,17 @@ export class LocalDataManager{
     }
     return LocalDataManager.localDataManager
   }
+
   queryUserData(){
     return this.userData
   }
+
+  initUserData(username: string, password: string){
+    this.userData = new UserData(username, password)
+  }
+
   insertAddress(address: string){
-    this.userData.addressList.push(address)
+    this.userData.addressList.splice(0, 0, address)
   }
 
   queryItemList() {
