@@ -53,12 +53,14 @@ export class CartItem{
 export class OrderItem{
   item: Item
   quantity: number
+  payTime: string
   styles? : number[] = []
 
 
-  constructor(item: Item, quantity: number, styles?: number[]) {
+  constructor(item: Item, quantity: number, payTime: string, styles?: number[]) {
     this.item = item
     this.quantity = quantity
+    this.payTime = payTime
     this.styles = styles
   }
 

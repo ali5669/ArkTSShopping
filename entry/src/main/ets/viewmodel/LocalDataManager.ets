@@ -52,7 +52,8 @@ export class LocalDataManager{
 
   insertOrder(id: string, quantity: number, styles?: number[]){
     const item = this.queryItemListById(id)
-    const orderItem: OrderItem = new OrderItem(item, quantity, styles)
+    const time = new Date().toString()
+    const orderItem: OrderItem = new OrderItem(item, quantity, time, styles)
     this.orderData.splice(0, 0, orderItem)
   }
 
