@@ -27,6 +27,11 @@ export class LocalDataManager{
     return result
   }
 
+  queryItemListByTitle(title: string){
+    const results = ItemData.filter(item => item.title.includes(title))
+    return results
+  }
+
   queryCartList(){
     return this.cartList
   }
