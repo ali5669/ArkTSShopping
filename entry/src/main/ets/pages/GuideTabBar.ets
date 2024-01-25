@@ -17,17 +17,17 @@ struct GuideTabBar {
   private controller: TabsController = new TabsController()
 
   private localDataManager: LocalDataManager = LocalDataManager.instance()
-  @State shopCart: CartItem[] = []
+  @State cartList: CartItem[] = []
   @State orderList: OrderItem[] = []
 
   onPageShow(){
-    this.shopCart = this.localDataManager.queryCartList()
+    this.cartList = this.localDataManager.queryCartList()
     this.orderList = this.localDataManager.queryOrderList()
   }
 
   // 刷新购物车和订单
   refresh(){
-    this.shopCart = this.localDataManager.queryCartList()
+    this.cartList = this.localDataManager.queryCartList()
     this.orderList = this.localDataManager.queryOrderList()
   }
 
@@ -52,8 +52,7 @@ struct GuideTabBar {
         TabContent() {
           CartPage({
             username: this.param.username,
-            cartList: $shopCart,
-            orderList: $orderList,
+            cartList: $cartList,
             onRefresh:() => this.refresh()
           })
             .width('100%')

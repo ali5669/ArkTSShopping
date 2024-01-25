@@ -13,19 +13,18 @@ import { LocalDataManager } from '../viewmodel/LocalDataManager'
 @Component
 export struct CartPage {
   @State message: string = 'Hello World'
-  @State finallPrice: number =0
+  @State finalPrice: number =0
   private username:string
   private localDataManager: LocalDataManager = LocalDataManager.instance()
   @Link cartList: CartItem[]
-  @Link orderList: OrderItem[]
   @State selectList: boolean[] = []
 
   private onRefresh?: () => void
 
   aboutToAppear(){
-    for (let index = 0; index < this.cartList.length; index++) {
-      this.selectList.push(false)
-    }
+    // for (let index = 0; index < this.cartList.length; index++) {
+    //   this.selectList.push(false)
+    // }
   }
 
   onPageShow(){
@@ -40,15 +39,12 @@ export struct CartPage {
       this.onRefresh()
     }
     //TODO: 添加重新计算总和的函数
-    this.finallPrice = 0
-    for (let index = 0; index < this.selectList.length; index++) {
+    this.finalPrice = 0
+    for (let index = 0; index < this.cartList.length; index++) {
 
       if(this.selectList[index]){
-        this.finallPrice = this.finallPrice + this.cartList[index].getTotalPrice()
+        this.finalPrice = this.finalPrice + this.cartList[index].getTotalPrice()
       }
-      // else{
-      //   this.finallprice = this.finallprice - this.cartList[index].getTotalPrice()
-      // }
     }
   }
 
@@ -80,7 +76,7 @@ export struct CartPage {
         //     // this.onTaskChange()
         //   })
 
-        Button(`总计 ￥`+this.finallPrice)
+        Button(`总计 ￥`+this.finalPrice)
           .width('40%')
           .onClick(()=>{
               this.onCashButtonClick()
@@ -114,6 +110,7 @@ export struct CartPage {
         let cartItem = this.cartList[index]
         this.localDataManager.insertOrderFromCart(cartItem)
         ids.push(cartItem.item.id)
+        this.selectList[index] = false
       }
     }
     this.localDataManager.deleteCart(ids)
