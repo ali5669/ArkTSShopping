@@ -13,7 +13,7 @@ import { LocalDataManager } from '../viewmodel/LocalDataManager'
 @Component
 export struct CartPage {
   @State message: string = 'Hello World'
-  @State finallprice: number =0
+  @State finallPrice: number =0
   private username:string
   private localDataManager: LocalDataManager = LocalDataManager.instance()
   @Link cartList: CartItem[]
@@ -40,11 +40,11 @@ export struct CartPage {
       this.onRefresh()
     }
     //TODO: 添加重新计算总和的函数
-    this.finallprice = 0
+    this.finallPrice = 0
     for (let index = 0; index < this.selectList.length; index++) {
 
       if(this.selectList[index]){
-        this.finallprice = this.finallprice + this.cartList[index].getTotalPrice()
+        this.finallPrice = this.finallPrice + this.cartList[index].getTotalPrice()
       }
       // else{
       //   this.finallprice = this.finallprice - this.cartList[index].getTotalPrice()
@@ -64,7 +64,7 @@ export struct CartPage {
           (cartItem: CartItem, index: number) => {
             ListItem(){
               //TODO 修改接口，直接传 cartItem
-              this.ItemCard(cartItem.item, index)
+              this.ItemCard(cartItem, index)
             }
           }
         )
@@ -80,11 +80,11 @@ export struct CartPage {
         //     // this.onTaskChange()
         //   })
 
-        Button(`总计 ￥`+this.finallprice)
+        Button(`总计 ￥`+this.finallPrice)
           .width('40%')
           .onClick(()=>{
-            this.onCashButtonClick()
-            // this.refreshCartPage()
+              this.onCashButtonClick()
+              this.refreshCartPage()
           })
       }
       .padding({bottom: 10})
@@ -120,7 +120,7 @@ export struct CartPage {
   }
 
   // 局部自定义构建函数
-  @Builder ItemCard(item: Item, index: number){
+  @Builder ItemCard(cartItem: CartItem, index: number){
     //TODO 显示 cardItem 的 quantity 在最右侧（物品数量），并且能够统计总金额
     Row({space: 10}){
       Checkbox()
@@ -129,18 +129,18 @@ export struct CartPage {
           this.selectList[index] = val
           this.refreshCartPage()//
         })
-      Image(item.image)
+      Image(cartItem.item.image)
         .width(100)
       Column({space: 4}){
-        Text(item.title)
+        Text(cartItem.item.title)
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
-        Text('￥' + item.price)
+        Text('￥' + cartItem.getPrice())
           .priceText()
-        Text('数量' + this.cartList[index].quantity)
+        Text('数量' + cartItem.quantity)
           .fontColor('#36D')
           .fontSize(15)
-        Text('总金额￥' + item.price * this.cartList[index].quantity)
+        Text('总金额￥' + cartItem.getTotalPrice())
           .priceText()
       }
       .height('100%')
