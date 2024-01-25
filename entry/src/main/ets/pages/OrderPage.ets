@@ -34,13 +34,14 @@ export struct OrderPage {
               this.orderList,
               (orderItem: OrderItem,index: number) => {
                 ListItem(){
-                  this.ItemCard(orderItem.item,index)
+                  this.ItemCard(orderItem, index)
                 }
               }
             )
           }
           .width('100%')
-          .layoutWeight(2)
+          .height('100%')
+          .layoutWeight(1)
         }
         .tabBar('全部')
 
@@ -77,16 +78,16 @@ export struct OrderPage {
   }
 
   // 局部自定义构建函数
-  @Builder ItemCard(item: Item,index: number){
+  @Builder ItemCard(orderItem: OrderItem, index: number){
     Column({space: 4}){
       Row({space: 10}){
-        Image(item.image)
+        Image(orderItem.item.image)
           .width(90)
         Column({space: 4}){
-          Text(item.title)
+          Text(orderItem.item.title)
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
-          Text('实付款 ￥' + item.price)
+          Text('实付款 ￥' + orderItem.getTotalPrice())
             .priceText()
           Row(){
             Button('延长收货')
@@ -99,7 +100,7 @@ export struct OrderPage {
         .height('90%')
         .alignItems(HorizontalAlign.Start)
     }.width('100%')
-      Text('付款时间:' +this.orderList[index].payTime)
+      Text('付款时间:' + orderItem.payTime)
         .fontSize(12)
         .fontColor('#F36')
         .textAlign(TextAlign.Start)
