@@ -32,9 +32,9 @@ export struct OrderPage {
           List({space: 8}){
             ForEach(
               this.orderList,
-              (orderItem: OrderItem) => {
+              (orderItem: OrderItem,index: number) => {
                 ListItem(){
-                  this.ItemCard(orderItem.item)
+                  this.ItemCard(orderItem.item,index)
                 }
               }
             )
@@ -77,31 +77,37 @@ export struct OrderPage {
   }
 
   // 局部自定义构建函数
-  @Builder ItemCard(item: Item){
-    Row({space: 10}){
-      Image(item.image)
-        .width(100)
-      Column({space: 4}){
-        Text(item.title)
-          .fontSize(20)
-          .fontWeight(FontWeight.Bold)
-        Text('实付款 ￥' + item.price)
-          .priceText()
-        Row(){
-          Button('延长收货')
-          //  Button('查看物流')
-          Button('确认收货')
-        }.justifyContent(FlexAlign.SpaceBetween)
-        .width('40%')
-      }
-      .height('100%')
-      .alignItems(HorizontalAlign.Start)
+  @Builder ItemCard(item: Item,index: number){
+    Column({space: 4}){
+      Row({space: 10}){
+        Image(item.image)
+          .width(90)
+        Column({space: 4}){
+          Text(item.title)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+          Text('实付款 ￥' + item.price)
+            .priceText()
+          Row(){
+            Button('延长收货')
+              .fontSize(12)
+            Button('确认收货')
+              .fontSize(12)
+          }.justifyContent(FlexAlign.SpaceBetween)
+          .width('40%')
+        }
+        .height('90%')
+        .alignItems(HorizontalAlign.Start)
+    }.width('100%')
+      Text('付款时间:' +this.orderList[index].payTime)
+        .fontSize(12)
+        .fontColor('#F36')
+        .textAlign(TextAlign.Start)
+        .height('10%')
     }
-    .width('100%')
     .backgroundColor('#FFF')
     .borderRadius(20)
     .height(140)
     .padding(10)
-
   }
 }
