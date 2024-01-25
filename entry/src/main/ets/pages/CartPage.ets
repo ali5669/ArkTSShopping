@@ -13,6 +13,7 @@ import { LocalDataManager } from '../viewmodel/LocalDataManager'
 @Component
 export struct CartPage {
   @State message: string = 'Hello World'
+  @State finallprice: number =0
   private username:string
   private localDataManager: LocalDataManager = LocalDataManager.instance()
   @Link cartList: CartItem[]
@@ -39,7 +40,16 @@ export struct CartPage {
       this.onRefresh()
     }
     //TODO: 添加重新计算总和的函数
+    this.finallprice = 0
+    for (let index = 0; index < this.selectList.length; index++) {
 
+      if(this.selectList[index]){
+        this.finallprice = this.finallprice + this.cartList[index].getTotalPrice()
+      }
+      // else{
+      //   this.finallprice = this.finallprice - this.cartList[index].getTotalPrice()
+      // }
+    }
   }
 
   build() {
@@ -70,11 +80,11 @@ export struct CartPage {
         //     // this.onTaskChange()
         //   })
 
-        Button(`总计 ￥110`)
+        Button(`总计 ￥`+this.finallprice)
           .width('40%')
           .onClick(()=>{
             this.onCashButtonClick()
-            this.refreshCartPage()
+            // this.refreshCartPage()
           })
       }
       .padding({bottom: 10})
@@ -117,6 +127,7 @@ export struct CartPage {
         .select(this.selectList[index])
         .onChange(val => {
           this.selectList[index] = val
+          this.refreshCartPage()//
         })
       Image(item.image)
         .width(100)
@@ -125,6 +136,11 @@ export struct CartPage {
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
         Text('￥' + item.price)
+          .priceText()
+        Text('数量' + this.cartList[index].quantity)
+          .fontColor('#36D')
+          .fontSize(15)
+        Text('总金额￥' + item.price * this.cartList[index].quantity)
           .priceText()
       }
       .height('100%')
