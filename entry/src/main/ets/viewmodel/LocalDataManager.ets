@@ -28,7 +28,7 @@ export class LocalDataManager{
   }
 
   queryItemListByTitle(title: string){
-    const results = ItemData.filter(item => item.title.includes(title))
+    const results = ItemData.filter(item => item.title.toLowerCase().includes(title.toLowerCase()))
     return results
   }
 
