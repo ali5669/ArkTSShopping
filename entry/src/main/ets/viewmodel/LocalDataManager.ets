@@ -1,10 +1,12 @@
 import {CartItem, Item, OrderItem} from './ItemModel'
 import {ItemData} from './ItemData'
+import { UserData } from './UserData'
 
 export class LocalDataManager{
   private static localDataManager: LocalDataManager
   private cartList: CartItem[] = []
   private orderData: OrderItem[] = []
+  private userData: UserData
 
   private constructor() {
 
@@ -15,6 +17,12 @@ export class LocalDataManager{
       LocalDataManager.localDataManager = new LocalDataManager()
     }
     return LocalDataManager.localDataManager
+  }
+  queryUserData(){
+    return this.userData
+  }
+  insertAddress(address: string){
+    this.userData.addressList.push(address)
   }
 
   queryItemList() {

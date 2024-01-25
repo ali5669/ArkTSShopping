@@ -3,6 +3,7 @@
     "pages/Login",
     "pages/CashPage",
     "pages/ItemDetail",
-    "pages/GuideTabBar"
+    "pages/GuideTabBar",
+    "pages/AddressPage"
   ]
 }
